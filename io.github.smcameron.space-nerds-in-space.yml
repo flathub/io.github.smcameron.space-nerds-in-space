@@ -59,7 +59,7 @@ modules:
     build-commands: 
       - make install PREFIX=${FLATPAK_DEST} WITHVOICECHAT=yes 
       - install -Dm0644 share/applications/${FLATPAK_ID}.svg "${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg"
-      - install -Dm0644 share/metainfo/${FLATPAK_ID}.metainfo.xml "${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml.template"
+      - install -Dm0644 share/metainfo/${FLATPAK_ID}.metainfo.xml.template "${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml"
       - install -Dm0644 share/applications/${FLATPAK_ID}.desktop "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
       - install -Dm755 snis.sh ${FLATPAK_DEST}/bin/snis.sh
     sources:
