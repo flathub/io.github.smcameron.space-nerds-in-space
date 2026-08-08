@@ -26,7 +26,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/vpelss/snis_flatpak.git
-        commit: 3bb2936da03097a5ef8769f1819d8cbe92f140f4
+        commit: c73271d171c0d86d90cbfd8e7ca7df36730f6a41
 
   - name: portaudio
     buildsystem: cmake-ninja
@@ -54,7 +54,7 @@ modules:
 
   - shared-modules/lua5.3/lua-5.3.5.json
   - shared-modules/glu/glu-9.json
-  - shared-modules/glew/glew.json
+  #- shared-modules/glew/glew.json
 
   - name: snis
     buildsystem: simple
@@ -67,7 +67,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/smcameron/space-nerds-in-space.git
-        commit: 6e62b2100ccb7e91949c58868a658b882fabae3e
+        commit: 8774d8ba241f638d6b67cff28add200368704e35
       - type: script
         dest-filename: snis.sh
         commands:
