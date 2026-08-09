@@ -59,17 +59,33 @@ modules:
   - name: snis
     buildsystem: simple
     build-commands:
-      - make install PREFIX=${FLATPAK_DEST} WITHVOICECHAT=yes 
+      #- make install PREFIX=${FLATPAK_DEST} WITHVOICECHAT=yes 
+      - install -Dm755 snis_build.sh ${FLATPAK_DEST}/bin/snis_build.sh # x86_64 or aarch64 builds differ
+      - ${FLATPAK_DEST}/bin/snis_build.sh #make is handled in snis_build.sh
       - install -Dm0644 share/applications/${FLATPAK_ID}.svg "${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg"
       - install -Dm0644 share/metainfo/${FLATPAK_ID}.metainfo.xml.template "${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml.template"
       - install -Dm0644 share/applications/${FLATPAK_ID}.desktop "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
       - install -Dm755 snis.sh ${FLATPAK_DEST}/bin/snis.sh
     sources:
-      - type: git
-        url: https://github.com/smcameron/space-nerds-in-space.git
-        commit: 0fa59fb29a0fc68d35c8276e8bff827ab68ce2a0
       - type: script
         dest-filename: snis.sh
         commands:
           - cd /app/bin
           - exec ./snis_client --fullscreen --auto-download-assets
+      - type: script
+        dest-filename: snis_build.sh
+        commands:
+          - make install PREFIX=${FLATPAK_DEST} WITHVOICECHAT=yes 
+        only-arches:
+          - x86_64
+      - type: script
+        dest-filename: snis_build.sh
+        commands:
+          - make install PREFIX=${FLATPAK_DEST} WITHVOICECHAT=yes USE_GLES=1
+        only-arches:
+          - aarch64
+      - type: git
+        url: https://github.com/smcameron/space-nerds-in-space.git
+        commit: 0fa59fb29a0fc68d35c8276e8bff827ab68ce2a0
+
+
